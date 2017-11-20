@@ -82,12 +82,12 @@ process.load('Configuration.StandardSequences.Generator_cff')
 
 
 #Gaussian distribution of vertices
-#if options.Energy in [20., 32.]:
-#    process.load('IOMC.EventVertexGenerators.VtxSmearedFlat_cfi')
-#else: 
-#    process.load('IOMC.EventVertexGenerators.VtxSmearedGauss_cfi')
-#process.load('IOMC.EventVertexGenerators.VtxSmearedGauss_cfi')
-process.load('IOMC.EventVertexGenerators.VtxSmearedFlat_cfi')
+if options.Energy in [20., 32.]:
+    process.load('IOMC.EventVertexGenerators.VtxSmearedFlat_cfi')
+else: 
+    process.load('IOMC.EventVertexGenerators.VtxSmearedGauss_cfi')
+
+
 
 
 #process.load('IOMC.EventVertexGenerators.VtxSmearedGauss_cfi')
