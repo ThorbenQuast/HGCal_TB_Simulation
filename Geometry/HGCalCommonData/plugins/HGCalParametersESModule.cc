@@ -10,12 +10,12 @@
 
 #include <memory>
 
-//#define DeugLog
+//#define EDM_ML_DEBUG
 
 class  HGCalParametersESModule : public edm::ESProducer {
 public:
   HGCalParametersESModule( const edm::ParameterSet & );
-  ~HGCalParametersESModule( void );
+  ~HGCalParametersESModule( void ) override;
   
   typedef std::shared_ptr<HGCalParameters> ReturnType;
   

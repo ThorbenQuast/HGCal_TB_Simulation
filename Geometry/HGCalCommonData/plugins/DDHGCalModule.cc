@@ -7,7 +7,7 @@
 #include <algorithm>
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
-#include "DetectorDescription/Base/interface/DDutils.h"
+#include "DetectorDescription/Core/interface/DDutils.h"
 #include "DetectorDescription/Core/interface/DDLogicalPart.h"
 #include "DetectorDescription/Core/interface/DDSolid.h"
 #include "DetectorDescription/Core/interface/DDMaterial.h"
@@ -43,7 +43,7 @@ void DDHGCalModule::initialize(const DDNumericArguments & nArgs,
   names         = vsArgs["VolumeNames"];
   thick         = vArgs["Thickness"];
   for (unsigned int i=0; i<materials.size(); ++i) {
-    copyNumber.push_back(1);
+    copyNumber.emplace_back(1);
   }
 #ifdef EDM_ML_DEBUG
   std::cout << "DDHGCalModule: " << materials.size()
@@ -125,7 +125,7 @@ void DDHGCalModule::execute(DDCompactView& cpv) {
 #endif
 }
 
-void DDHGCalModule::constructLayers(DDLogicalPart module, 
+void DDHGCalModule::constructLayers(const DDLogicalPart& module, 
 				    DDCompactView& cpv) {
   
 #ifdef EDM_ML_DEBUG
@@ -139,11 +139,13 @@ void DDHGCalModule::constructLayers(DDLogicalPart module,
     double  routF  = rMax(zi);
     int     laymax = laymin+layers[i];
     double  zz     = zi;
+    double  thickTot(0);
     for (int ly=laymin; ly<laymax; ++ly) {
       int     ii     = layerType[ly];
       int     copy   = copyNumber[ii];
       double  rinB   = (layerSense[ly] == 0) ? (zo*slopeB[0]) : (zo*slopeB[1]);
       zz            += (0.5*thick[ii]);
+      thickTot      += thick[ii];
 
       std::string name = "HGCal"+names[ii]+std::to_string(copy);
 #ifdef EDM_ML_DEBUG
@@ -160,9 +162,9 @@ void DDHGCalModule::constructLayers(DDLogicalPart module,
 	double alpha = CLHEP::pi/sectors;
 	double rmax  = routF*cos(alpha) - tol;
 	std::vector<double> pgonZ, pgonRin, pgonRout;
-	pgonZ.push_back(-0.5*thick[ii]);    pgonZ.push_back(0.5*thick[ii]);
-	pgonRin.push_back(rinB);            pgonRin.push_back(rinB);   
-	pgonRout.push_back(rmax);           pgonRout.push_back(rmax);   
+	pgonZ.emplace_back(-0.5*thick[ii]);    pgonZ.emplace_back(0.5*thick[ii]);
+	pgonRin.emplace_back(rinB);            pgonRin.emplace_back(rinB);   
+	pgonRout.emplace_back(rmax);           pgonRout.emplace_back(rmax);   
 	DDSolid solid = DDSolidFactory::polyhedra(DDName(name, idNameSpace),
 						  sectors, -alpha, CLHEP::twopi,
 						  pgonZ, pgonRin, pgonRout);
@@ -187,6 +189,8 @@ void DDHGCalModule::constructLayers(DDLogicalPart module,
 		  << " Tubs made of " << matName << " of dimensions " << rinB 
 		  << ", " << routF << ", " << 0.5*thick[ii] << ", 0.0, "
 		  << CLHEP::twopi/CLHEP::deg << std::endl;
+	std::cout << "DDHGCalModule test position in: " << glog.name() 
+		  << " number "	<< copy << std::endl;
 #endif
 	positionSensitive(glog,rinB,routF,cpv);
       }
@@ -203,6 +207,16 @@ void DDHGCalModule::constructLayers(DDLogicalPart module,
     } // End of loop over layers in a block
     zi     = zo;
     laymin = laymax;
+    if (fabs(thickTot-layerThick[i]) < 0.00001) {
+    } else if (thickTot > layerThick[i]) {
+      edm::LogError("HGCalGeom") << "Thickness of the partition " << layerThick[i]
+				 << " is smaller than thickness " << thickTot
+				 << " of all its components **** ERROR ****\n";
+    } else if (thickTot < layerThick[i]) {
+      edm::LogWarning("HGCalGeom") << "Thickness of the partition " 
+				   << layerThick[i] << " does not match with "
+				   << thickTot << " of the components\n";
+    }
   }   // End of loop over blocks
 }
 

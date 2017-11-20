@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "FWCore/Framework/interface/one/EDAnalyzer.h"
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/EventSetup.h"
@@ -11,7 +13,7 @@ class HGCalParametersAnalyzer : public edm::one::EDAnalyzer<>
 {
 public:
   explicit HGCalParametersAnalyzer( const edm::ParameterSet& ) {}
-  ~HGCalParametersAnalyzer() {}
+  ~HGCalParametersAnalyzer() override {}
   
   void beginJob() override {}
   void analyze(edm::Event const& iEvent, edm::EventSetup const&) override;
