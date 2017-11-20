@@ -22,6 +22,13 @@ options.register('NEvents',
                  VarParsing.VarParsing.varType.int,
                  'Number of events to be generated')
 
+options.register('setupConfiguration',
+                1,
+                 VarParsing.VarParsing.multiplicity.singleton,
+                 VarParsing.VarParsing.varType.int,
+                 'setupConfiguration (0: September 2016, 1: July - 4: 20 Layers in October in H6A".'
+                )
+
 options.register('Energy',
                  200.,
                  VarParsing.VarParsing.multiplicity.singleton,
@@ -35,6 +42,12 @@ options.register('EnergyWidth',
                  VarParsing.VarParsing.varType.float,
                  'Spread of the energy'
                 )
+
+options.register('physicsList',
+                 'FTFP_BERT_EMM',
+                 VarParsing.VarParsing.multiplicity.singleton,
+                 VarParsing.VarParsing.varType.string,
+                 'PhysicsList to be used')
 
 options.register('PDGID',
                  11,
@@ -166,8 +179,7 @@ process.generator = cms.EDProducer("FlatRandomEThetaGunProducer",
 
 #definition of physics lists:
 #http://grupo.us.es/geterus/images/pdf/ieav-ita-2014/L9b-ReferencePhysicsLists.pdf
-#physicsList = 'SimG4Core/Physics/QGSP_FTFP_BERT_EMM'   #simulated by me for position resolution analysis and energy reco
-physicsList = 'SimG4Core/Physics/FTFP_BERT_EMM'    #simulated by the others and used for validation of energy reco with DNN
+physicsList = 'SimG4Core/Physics/%s' % options.physicsList    
 print "Using as physics list: %s" % physicsList
 print "Using initial seed: ", options.RandomSeed
 process.g4SimHits.Physics.type = cms.string(physicsList)
