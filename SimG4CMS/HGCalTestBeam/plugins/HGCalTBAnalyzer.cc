@@ -920,7 +920,7 @@ void HGCalTBAnalyzer::analyzeSimHits (int type, std::vector<PCaloHit>& hits,
     int cellno = -1;
     cellno = (id>>0)&0xFF;
     int key = 1000*layer + cellno;
-    std::cout<<"Layer: "<<layer<<"   cell no: "<<cellno<<" with energy [keV]: "<<energy*1e6<<std::endl;
+    //std::cout<<"Layer: "<<layer<<"   cell no: "<<cellno<<" with energy [keV]: "<<energy*1e6<<std::endl;
     h_cell_energy[key]->Fill(energy*1e6);
   }
 }
