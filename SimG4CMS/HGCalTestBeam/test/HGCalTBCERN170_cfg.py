@@ -120,7 +120,7 @@ beamprofiles = {
     }
 }
 
-
+beamprofiles[2][2212] = beamprofiles[2][211]
 
 
 options = VarParsing.VarParsing('standard')
