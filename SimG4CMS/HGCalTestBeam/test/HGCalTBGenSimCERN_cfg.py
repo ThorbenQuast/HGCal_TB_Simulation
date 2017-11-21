@@ -32,7 +32,7 @@ options.register('setupConfiguration',
 options.register('Energy',
                  200.,
                  VarParsing.VarParsing.multiplicity.singleton,
-                 VarParsing.VarParsing.varType.float,
+                 VarParsing.VarParsing.varType.int,
                  'Electron energy +/- EnergyWidth'
                 )
 
