@@ -1,6 +1,127 @@
 import FWCore.ParameterSet.Config as cms
 import FWCore.ParameterSet.VarParsing as VarParsing
 
+beamprofiles = {
+    2: {    #configuration index: September 2017
+        11: {   #particle ID
+            20: {   #energy
+                "type": "Flat",
+                "minX": -28,
+                "maxX": 34,
+                "minY": -28,
+                "maxY": 24,
+                "minZ": -500.00001, 
+                "maxZ": -499.99999
+            },
+            32: {   #energy
+                "type": "Flat",
+                "minX": -28,
+                "maxX": 34,
+                "minY": -28,
+                "maxY": 24,
+                "minZ": -500.00001, 
+                "maxZ": -499.99999
+            },
+            50: {   #energy
+                "type": "Flat",
+                "minX": -28,
+                "maxX": 34,
+                "minY": -28,
+                "maxY": 24,
+                "minZ": -500.00001, 
+                "maxZ": -499.99999
+            },
+            80: {   #energy
+                "type": "Flat",
+                "minX": -28,
+                "maxX": 34,
+                "minY": -28,
+                "maxY": 24,
+                "minZ": -500.00001, 
+                "maxZ": -499.99999
+            },
+            90: {   #energy
+                "type": "Flat",
+                "minX": -28,
+                "maxX": 36,
+                "minY": -28,
+                "maxY": 24,
+                "minZ": -500.00001, 
+                "maxZ": -499.99999
+            }
+        },
+        211: {  #particle ID
+            100: {  #energy
+                "type": "Flat",
+                "minX": -24,
+                "maxX": 36,
+                "minY": -28, 
+                "maxY": 24,
+                "minZ": -500.00001, 
+                "maxZ": -499.99999
+            },
+            150: {  #energy
+                "type": "Flat",
+                "minX": -25,
+                "maxX": 16,
+                "minY": -2, 
+                "maxY": 22,
+                "minZ": -500.00001, 
+                "maxZ": -499.99999
+            },
+            200: {  #energy
+                "type": "Flat",
+                "minX": -28, 
+                "maxX": 6,
+                "minY": -28,
+                "maxY": 22,
+                "minZ": -500.00001, 
+                "maxZ": -499.99999
+            },
+            250: {  #energy
+                "type": "Gauss",
+                "meanX": -11,
+                "sigmaX": 22,
+                "meanY": 1,
+                "sigmaY": 19,
+                "meanZ": -500.00000, 
+                "sigmaZ": 0.000003
+            },
+            300: {  #energy
+                "type": "Flat",
+                "minX": -28,
+                "maxX": 30,
+                "minY": -28,
+                "maxY": 20,
+                "minZ": -500.00001, 
+                "maxZ": -499.99999
+            },
+            350: {  #energy
+                "type": "Flat",
+                "minX": -28,
+                "maxX": 20,
+                "minY": -8,
+                "maxY": 10,
+                "minZ": -500.00001, 
+                "maxZ": -499.99999
+            }
+        },
+        13: {   #particle ID
+            150: {  #energy
+                "type": "Gauss",
+                "meanX": -10,
+                "sigmaX": 13,
+                "meanY": 1,
+                "sigmaY": 19,
+                "meanZ": -500.00000, 
+                "sigmaZ": 0.000003
+            }
+        }
+    }
+}
+
+
+
 
 options = VarParsing.VarParsing('standard')
 
@@ -32,7 +153,7 @@ options.register('setupConfiguration',
 options.register('Energy',
                  200.,
                  VarParsing.VarParsing.multiplicity.singleton,
-                 VarParsing.VarParsing.varType.float,
+                 VarParsing.VarParsing.varType.int,
                  'Electron energy +/- EnergyWidth'
                 )
 
@@ -88,7 +209,10 @@ process.load('Geometry.HGCalCommonData.hgcalNumberingInitialization_cfi')
 process.load('Geometry.HGCalCommonData.hgcalParametersInitialization_cfi')
 process.load('Configuration.StandardSequences.MagneticField_0T_cff')
 process.load('Configuration.StandardSequences.Generator_cff')
-process.load('IOMC.EventVertexGenerators.VtxSmearedFlat_cfi')
+if beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["type"]=="Flat":
+    process.load('IOMC.EventVertexGenerators.VtxSmearedFlat_cfi')
+else:
+    process.load('IOMC.EventVertexGenerators.VtxSmearedGauss_cfi')
 process.load('GeneratorInterface.Core.genFilterSummary_cff')
 process.load('Configuration.StandardSequences.SimIdeal_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
@@ -161,12 +285,22 @@ process.g4SimHits.StackingAction.SaveAllPrimaryDecayProductsAndConversions = cms
 process.RandomNumberGeneratorService.generator.initialSeed = cms.untracked.uint32(options.RandomSeed)
 process.RandomNumberGeneratorService.VtxSmeared.initialSeed = cms.untracked.uint32(options.RandomSeed)
 
-process.VtxSmeared.MinZ = 1094.99999
-process.VtxSmeared.MaxZ = 1095.00001
-process.VtxSmeared.MinX = -0.6
-process.VtxSmeared.MaxX =  0.6
-process.VtxSmeared.MinY = -0.6
-process.VtxSmeared.MaxY =  0.6
+
+if beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["type"]=="Flat":
+    process.VtxSmeared.MinZ = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["minZ"]
+    process.VtxSmeared.MaxZ = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["maxZ"]
+    process.VtxSmeared.MinX = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["minX"]
+    process.VtxSmeared.MaxX = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["maxX"]
+    process.VtxSmeared.MinY = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["minY"]
+    process.VtxSmeared.MaxY = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["maxY"]
+else:
+    process.VtxSmeared.MeanY = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["meanY"]
+    process.VtxSmeared.MeanX = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["meanX"]
+    process.VtxSmeared.MeanZ = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["meanZ"]
+    process.VtxSmeared.SigmaX = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["sigmaX"]
+    process.VtxSmeared.SigmaY = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["sigmaY"]
+    process.VtxSmeared.SigmaZ = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["sigmaZ"]
+
 process.g4SimHits.HGCSD.RejectMouseBite = True
 process.g4SimHits.HGCSD.RotatedWafer    = True
 process.g4SimHits.Watchers = cms.VPSet(cms.PSet(
