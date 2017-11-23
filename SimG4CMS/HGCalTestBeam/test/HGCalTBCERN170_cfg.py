@@ -6,114 +6,114 @@ beamprofiles = {
         11: {   #particle ID
             20: {   #energy
                 "type": "Flat",
-                "minX": -28,
-                "maxX": 34,
-                "minY": -28,
-                "maxY": 24,
-                "minZ": -500.00001, 
-                "maxZ": -499.99999
+                "minX": -2.8,   #cm!
+                "maxX": 3.4,
+                "minY": -2.8,
+                "maxY": 2.4,
+                "minZ": -800.00001, 
+                "maxZ": -799.99999
             },
             32: {   #energy
                 "type": "Flat",
-                "minX": -28,
-                "maxX": 34,
-                "minY": -28,
-                "maxY": 24,
-                "minZ": -500.00001, 
-                "maxZ": -499.99999
+                "minX": -2.8,
+                "maxX": 3.4,
+                "minY": -2.8,
+                "maxY": 2.4,
+                "minZ": -800.00001, 
+                "maxZ": -799.99999
             },
             50: {   #energy
                 "type": "Flat",
-                "minX": -28,
-                "maxX": 34,
-                "minY": -28,
-                "maxY": 24,
-                "minZ": -500.00001, 
-                "maxZ": -499.99999
+                "minX": -2.8,
+                "maxX": 3.4,
+                "minY": -2.8,
+                "maxY": 2.4,
+                "minZ": -800.00001, 
+                "maxZ": -799.99999
             },
             80: {   #energy
                 "type": "Flat",
-                "minX": -28,
-                "maxX": 34,
-                "minY": -28,
-                "maxY": 24,
-                "minZ": -500.00001, 
-                "maxZ": -499.99999
+                "minX": -2.8,
+                "maxX": 3.4,
+                "minY": -2.8,
+                "maxY": 2.4,
+                "minZ": -800.00001, 
+                "maxZ": -799.99999
             },
             90: {   #energy
                 "type": "Flat",
-                "minX": -28,
-                "maxX": 36,
-                "minY": -28,
-                "maxY": 24,
-                "minZ": -500.00001, 
-                "maxZ": -499.99999
+                "minX": -2.8,
+                "maxX": 3.6,
+                "minY": -2.8,
+                "maxY": 2.4,
+                "minZ": -800.00001, 
+                "maxZ": -799.99999
             }
         },
         211: {  #particle ID
             100: {  #energy
                 "type": "Flat",
-                "minX": -24,
-                "maxX": 36,
-                "minY": -28, 
-                "maxY": 24,
-                "minZ": -500.00001, 
-                "maxZ": -499.99999
+                "minX": -2.4,
+                "maxX": 3.6,
+                "minY": -2.8, 
+                "maxY": 2.4,
+                "minZ": -800.00001, 
+                "maxZ": -799.99999
             },
             150: {  #energy
                 "type": "Flat",
-                "minX": -25,
-                "maxX": 16,
-                "minY": -2, 
-                "maxY": 22,
-                "minZ": -500.00001, 
-                "maxZ": -499.99999
+                "minX": -2.5,
+                "maxX": 1.6,
+                "minY": -0.2, 
+                "maxY": 2.2,
+                "minZ": -800.00001, 
+                "maxZ": -799.99999
             },
             200: {  #energy
                 "type": "Flat",
-                "minX": -28, 
-                "maxX": 6,
-                "minY": -28,
-                "maxY": 22,
-                "minZ": -500.00001, 
-                "maxZ": -499.99999
+                "minX": -2.8, 
+                "maxX": 0.6,
+                "minY": -2.8,
+                "maxY": 2.2,
+                "minZ": -800.00001, 
+                "maxZ": -799.99999
             },
             250: {  #energy
                 "type": "Gauss",
-                "meanX": -11,
-                "sigmaX": 22,
-                "meanY": 1,
-                "sigmaY": 19,
-                "meanZ": -500.00000, 
+                "meanX": -1.1,
+                "sigmaX": 2.2,
+                "meanY": 0.1,
+                "sigmaY": 1.9,
+                "meanZ": -800.00000, 
                 "sigmaZ": 0.000003
             },
             300: {  #energy
                 "type": "Flat",
-                "minX": -28,
-                "maxX": 30,
-                "minY": -28,
-                "maxY": 20,
-                "minZ": -500.00001, 
-                "maxZ": -499.99999
+                "minX": -2.8,
+                "maxX": 3.0,
+                "minY": -2.8,
+                "maxY": 2.0,
+                "minZ": -800.00001, 
+                "maxZ": -799.99999
             },
             350: {  #energy
                 "type": "Flat",
-                "minX": -28,
-                "maxX": 20,
-                "minY": -8,
-                "maxY": 10,
-                "minZ": -500.00001, 
-                "maxZ": -499.99999
+                "minX": -2.8,
+                "maxX": 2.0,
+                "minY": -0.8,
+                "maxY": 1.0,
+                "minZ": -800.00001, 
+                "maxZ": -799.99999
             }
         },
         13: {   #particle ID
             150: {  #energy
                 "type": "Gauss",
-                "meanX": -10,
-                "sigmaX": 13,
-                "meanY": 1,
-                "sigmaY": 19,
-                "meanZ": -500.00000, 
+                "meanX": -1.0,
+                "sigmaX": 1.3,
+                "meanY": 0.1,
+                "sigmaY": 1.9,
+                "meanZ": -800.00000, 
                 "sigmaZ": 0.000003
             }
         }
