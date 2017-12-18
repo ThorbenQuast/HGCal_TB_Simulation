@@ -2,6 +2,75 @@ import FWCore.ParameterSet.Config as cms
 import FWCore.ParameterSet.VarParsing as VarParsing
 
 beamprofiles = {
+    1: {    #configuration index: July 2017
+        11: {   #particle ID
+            80: {   #energy
+                "type": "Flat",
+                "minX": -2.0,
+                "maxX": 2.0,
+                "minY": -2.0,
+                "maxY": 2.0,
+                "minZ": -800.00001, 
+                "maxZ": -799.99999
+            },
+            200: {   #energy
+                "type": "Flat",
+                "minX": -2.0,
+                "maxX": 2.0,
+                "minY": -2.0,
+                "maxY": 2.0,
+                "minZ": -800.00001, 
+                "maxZ": -799.99999
+            }
+        },
+        211: {  #particle ID
+            100: {  #energy
+                "type": "Flat",
+                "minX": -2.0,
+                "maxX": 2.0,
+                "minY": -2.0,
+                "maxY": 2.0,
+                "minZ": -800.00001, 
+                "maxZ": -799.99999
+            },
+            150: {  #energy
+                "type": "Gauss",
+                "meanX": 0.,
+                "sigmaX": 1.8,
+                "meanY": 0.5,
+                "sigmaY": 1.0,
+                "meanZ": -800.00000, 
+                "sigmaZ": 0.000003
+            },
+            200: {  #energy
+                "type": "Gauss",
+                "meanX": 0.,
+                "sigmaX": 1.1,
+                "meanY": 0.4,
+                "sigmaY": 1.1,
+                "meanZ": -800.00000, 
+                "sigmaZ": 0.000003
+            },
+            250: {  #energy
+                "type": "Gauss",
+                "meanX": 0.2,
+                "sigmaX": 1.9,
+                "meanY": 0.3,
+                "sigmaY": 2.1,
+                "meanZ": -800.00000, 
+                "sigmaZ": 0.000003
+            },
+            300: {  #energy
+                "type": "Flat",
+                "minX": -2.0,
+                "maxX": 2.0,
+                "minY": -2.0,
+                "maxY": 2.0,
+                "minZ": -800.00001, 
+                "maxZ": -799.99999
+            }
+        }
+    },
     2: {    #configuration index: September 2017
         11: {   #particle ID
             20: {   #energy
@@ -120,6 +189,7 @@ beamprofiles = {
     }
 }
 
+beamprofiles[1][2212] = beamprofiles[1][211]
 beamprofiles[2][11][250] = beamprofiles[2][211][250]
 beamprofiles[2][211][50] = beamprofiles[2][11][50]
 beamprofiles[2][211][80] = beamprofiles[2][11][80]
