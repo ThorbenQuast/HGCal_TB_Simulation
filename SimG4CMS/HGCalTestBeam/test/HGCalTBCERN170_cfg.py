@@ -2,7 +2,7 @@ import FWCore.ParameterSet.Config as cms
 import FWCore.ParameterSet.VarParsing as VarParsing
 
 beamprofiles = {
-    1: {    #configuration index: July 2017
+    1: {    #configuration index: September 2017
         11: {   #particle ID
             80: {   #energy
                 "type": "Flat",
@@ -10,7 +10,9 @@ beamprofiles = {
                 "maxX": 2.0,
                 "minY": -2.0,
                 "maxY": 2.0,
-                "minZ": -800.00001, 
+                #"minZ": 1094.99999, #for v3 to test impact of upstream material in beam line
+                "minZ": -800.00001,  
+                #"maxZ": 1095.000001 #for v3 to test impact of upstream material in beam line
                 "maxZ": -799.99999
             },
             200: {   #energy
@@ -19,7 +21,22 @@ beamprofiles = {
                 "maxX": 2.0,
                 "minY": -2.0,
                 "maxY": 2.0,
-                "minZ": -800.00001, 
+                #"minZ": 1094.99999, #for v3 to test impact of upstream material in beam line
+                "minZ": -800.00001,  
+                #"maxZ": 1095.000001 #for v3 to test impact of upstream material in beam line
+                "maxZ": -799.99999
+            }
+        },
+        13: {   #particle ID
+            150: {   #energy
+                "type": "Flat",
+                "minX": -2.0,
+                "maxX": 2.0,
+                "minY": -2.0,
+                "maxY": 2.0,
+                #"minZ": 1094.99999, #for v3 to test impact of upstream material in beam line
+                "minZ": -800.00001,  
+                #"maxZ": 1095.000001 #for v3 to test impact of upstream material in beam line
                 "maxZ": -799.99999
             }
         },
@@ -30,7 +47,9 @@ beamprofiles = {
                 "maxX": 2.0,
                 "minY": -2.0,
                 "maxY": 2.0,
-                "minZ": -800.00001, 
+                #"minZ": 1094.99999, #for v3 to test impact of upstream material in beam line
+                "minZ": -800.00001,  
+                #"maxZ": 1095.000001 #for v3 to test impact of upstream material in beam line
                 "maxZ": -799.99999
             },
             150: {  #energy
@@ -39,7 +58,9 @@ beamprofiles = {
                 "sigmaX": 1.8,
                 "meanY": 0.5,
                 "sigmaY": 1.0,
+                #"meanZ": 1095., #for v3 to test impact of upstream material in beam line 
                 "meanZ": -800.00000, 
+                #"sigmaZ": 0.00001 #for v3 to test impact of upstream material in beam line
                 "sigmaZ": 0.000003
             },
             200: {  #energy
@@ -48,7 +69,9 @@ beamprofiles = {
                 "sigmaX": 1.1,
                 "meanY": 0.4,
                 "sigmaY": 1.1,
+                #"meanZ": 1095., #for v3 to test impact of upstream material in beam line 
                 "meanZ": -800.00000, 
+                #"sigmaZ": 0.00001 #for v3 to test impact of upstream material in beam line
                 "sigmaZ": 0.000003
             },
             250: {  #energy
@@ -57,7 +80,9 @@ beamprofiles = {
                 "sigmaX": 1.9,
                 "meanY": 0.3,
                 "sigmaY": 2.1,
+                #"meanZ": 1095., #for v3 to test impact of upstream material in beam line 
                 "meanZ": -800.00000, 
+                #"sigmaZ": 0.00001 #for v3 to test impact of upstream material in beam line
                 "sigmaZ": 0.000003
             },
             300: {  #energy
@@ -66,7 +91,9 @@ beamprofiles = {
                 "maxX": 2.0,
                 "minY": -2.0,
                 "maxY": 2.0,
-                "minZ": -800.00001, 
+                #"minZ": 1094.99999, #for v3 to test impact of upstream material in beam line
+                "minZ": -800.00001,  
+                #"maxZ": 1095.000001 #for v3 to test impact of upstream material in beam line
                 "maxZ": -799.99999
             }
         }
@@ -79,7 +106,9 @@ beamprofiles = {
                 "maxX": 3.4,
                 "minY": -2.8,
                 "maxY": 2.4,
-                "minZ": -800.00001, 
+                #"minZ": 1094.99999, #for v3 to test impact of upstream material in beam line
+                "minZ": -800.00001,  
+                #"maxZ": 1095.000001 #for v3 to test impact of upstream material in beam line
                 "maxZ": -799.99999
             },
             32: {   #energy
@@ -88,7 +117,9 @@ beamprofiles = {
                 "maxX": 3.4,
                 "minY": -2.8,
                 "maxY": 2.4,
-                "minZ": -800.00001, 
+                #"minZ": 1094.99999, #for v3 to test impact of upstream material in beam line
+                "minZ": -800.00001,  
+                #"maxZ": 1095.000001 #for v3 to test impact of upstream material in beam line
                 "maxZ": -799.99999
             },
             50: {   #energy
@@ -97,7 +128,9 @@ beamprofiles = {
                 "maxX": 3.4,
                 "minY": -2.8,
                 "maxY": 2.4,
-                "minZ": -800.00001, 
+                #"minZ": 1094.99999, #for v3 to test impact of upstream material in beam line
+                "minZ": -800.00001,  
+                #"maxZ": 1095.000001 #for v3 to test impact of upstream material in beam line
                 "maxZ": -799.99999
             },
             80: {   #energy
@@ -106,7 +139,9 @@ beamprofiles = {
                 "maxX": 3.4,
                 "minY": -2.8,
                 "maxY": 2.4,
-                "minZ": -800.00001, 
+                #"minZ": 1094.99999, #for v3 to test impact of upstream material in beam line
+                "minZ": -800.00001,  
+                #"maxZ": 1095.000001 #for v3 to test impact of upstream material in beam line
                 "maxZ": -799.99999
             },
             90: {   #energy
@@ -115,7 +150,9 @@ beamprofiles = {
                 "maxX": 3.6,
                 "minY": -2.8,
                 "maxY": 2.4,
-                "minZ": -800.00001, 
+                #"minZ": 1094.99999, #for v3 to test impact of upstream material in beam line
+                "minZ": -800.00001,  
+                #"maxZ": 1095.000001 #for v3 to test impact of upstream material in beam line
                 "maxZ": -799.99999
             }
         },
@@ -126,7 +163,9 @@ beamprofiles = {
                 "maxX": 3.6,
                 "minY": -2.8, 
                 "maxY": 2.4,
-                "minZ": -800.00001, 
+                #"minZ": 1094.99999, #for v3 to test impact of upstream material in beam line
+                "minZ": -800.00001,  
+                #"maxZ": 1095.000001 #for v3 to test impact of upstream material in beam line
                 "maxZ": -799.99999
             },
             150: {  #energy
@@ -135,7 +174,9 @@ beamprofiles = {
                 "maxX": 1.6,
                 "minY": -0.2, 
                 "maxY": 2.2,
-                "minZ": -800.00001, 
+                #"minZ": 1094.99999, #for v3 to test impact of upstream material in beam line
+                "minZ": -800.00001,  
+                #"maxZ": 1095.000001 #for v3 to test impact of upstream material in beam line
                 "maxZ": -799.99999
             },
             200: {  #energy
@@ -144,7 +185,9 @@ beamprofiles = {
                 "maxX": 0.6,
                 "minY": -2.8,
                 "maxY": 2.2,
-                "minZ": -800.00001, 
+                #"minZ": 1094.99999, #for v3 to test impact of upstream material in beam line
+                "minZ": -800.00001,  
+                #"maxZ": 1095.000001 #for v3 to test impact of upstream material in beam line
                 "maxZ": -799.99999
             },
             250: {  #energy
@@ -153,7 +196,9 @@ beamprofiles = {
                 "sigmaX": 2.2,
                 "meanY": 0.1,
                 "sigmaY": 1.9,
+                #"meanZ": 1095., #for v3 to test impact of upstream material in beam line 
                 "meanZ": -800.00000, 
+                #"sigmaZ": 0.00001 #for v3 to test impact of upstream material in beam line
                 "sigmaZ": 0.000003
             },
             300: {  #energy
@@ -162,7 +207,9 @@ beamprofiles = {
                 "maxX": 3.0,
                 "minY": -2.8,
                 "maxY": 2.0,
-                "minZ": -800.00001, 
+                #"minZ": 1094.99999, #for v3 to test impact of upstream material in beam line
+                "minZ": -800.00001,  
+                #"maxZ": 1095.000001 #for v3 to test impact of upstream material in beam line
                 "maxZ": -799.99999
             },
             350: {  #energy
@@ -171,7 +218,9 @@ beamprofiles = {
                 "maxX": 2.0,
                 "minY": -0.8,
                 "maxY": 1.0,
-                "minZ": -800.00001, 
+                #"minZ": 1094.99999, #for v3 to test impact of upstream material in beam line
+                "minZ": -800.00001,  
+                #"maxZ": 1095.000001 #for v3 to test impact of upstream material in beam line
                 "maxZ": -799.99999
             }
         },
@@ -182,12 +231,16 @@ beamprofiles = {
                 "sigmaX": 1.3,
                 "meanY": 0.1,
                 "sigmaY": 1.9,
+                #"meanZ": 1095., #for v3 to test impact of upstream material in beam line 
                 "meanZ": -800.00000, 
+                #"sigmaZ": 0.00001 #for v3 to test impact of upstream material in beam line
                 "sigmaZ": 0.000003
             }
         }
     }
 }
+
+
 
 beamprofiles[1][2212] = beamprofiles[1][211]
 beamprofiles[2][11][250] = beamprofiles[2][211][250]
