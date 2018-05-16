@@ -1,6 +1,7 @@
 import FWCore.ParameterSet.Config as cms
 import FWCore.ParameterSet.VarParsing as VarParsing
 
+ 
 beamprofiles = {
     1: {    #configuration index: September 2017
         11: {   #particle ID
@@ -240,8 +241,6 @@ beamprofiles = {
     }
 }
 
-
-
 beamprofiles[1][2212] = beamprofiles[1][211]
 beamprofiles[2][11][250] = beamprofiles[2][211][250]
 beamprofiles[2][211][50] = beamprofiles[2][11][50]
@@ -249,7 +248,6 @@ beamprofiles[2][211][80] = beamprofiles[2][11][80]
 beamprofiles[2][211][90] = beamprofiles[2][11][90]
 beamprofiles[2][13][250] = beamprofiles[2][211][250]
 beamprofiles[2][2212] = beamprofiles[2][211]
-
 
 options = VarParsing.VarParsing('standard')
 
@@ -337,7 +335,7 @@ process.load('Geometry.HGCalCommonData.hgcalNumberingInitialization_cfi')
 process.load('Geometry.HGCalCommonData.hgcalParametersInitialization_cfi')
 process.load('Configuration.StandardSequences.MagneticField_0T_cff')
 process.load('Configuration.StandardSequences.Generator_cff')
-if beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["type"]=="Flat":
+if beamprofiles[options.setupConfiguration][abs(options.PDGID)][options.Energy]["type"]=="Flat":
     process.load('IOMC.EventVertexGenerators.VtxSmearedFlat_cfi')
 else:
     process.load('IOMC.EventVertexGenerators.VtxSmearedGauss_cfi')
@@ -406,28 +404,33 @@ physicsList = 'SimG4Core/Physics/%s' % options.physicsList
 print "Using as physics list: %s" % physicsList
 print "Using initial seed: ", options.RandomSeed
 process.g4SimHits.Physics.type = cms.string(physicsList)
+process.g4SimHits.Physics.Verbosity = cms.untracked.int32(1)
 
 process.g4SimHits.StackingAction.SaveFirstLevelSecondary = cms.untracked.bool(True)
 process.g4SimHits.StackingAction.SaveAllPrimaryDecayProductsAndConversions = cms.untracked.bool(True)
+print "Setting russian roulette limit for gammas and neutrons to 0.0"
+process.g4SimHits.StackingAction.RusRoGammaEnergyLimit = cms.double(0.0)    #22 Feb 2018, as advised by Vladimir on 12 Feb
+process.g4SimHits.StackingAction.RusRoNeutronEnergyLimit = cms.double(0.0)  #probably ~30% more computing time
+
 
 process.RandomNumberGeneratorService.generator.initialSeed = cms.untracked.uint32(options.RandomSeed)
 process.RandomNumberGeneratorService.VtxSmeared.initialSeed = cms.untracked.uint32(options.RandomSeed)
 
 
-if beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["type"]=="Flat":
-    process.VtxSmeared.MinZ = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["minZ"]
-    process.VtxSmeared.MaxZ = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["maxZ"]
-    process.VtxSmeared.MinX = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["minX"]
-    process.VtxSmeared.MaxX = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["maxX"]
-    process.VtxSmeared.MinY = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["minY"]
-    process.VtxSmeared.MaxY = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["maxY"]
+if beamprofiles[options.setupConfiguration][abs(options.PDGID)][options.Energy]["type"]=="Flat":
+    process.VtxSmeared.MinZ = beamprofiles[options.setupConfiguration][abs(options.PDGID)][options.Energy]["minZ"]
+    process.VtxSmeared.MaxZ = beamprofiles[options.setupConfiguration][abs(options.PDGID)][options.Energy]["maxZ"]
+    process.VtxSmeared.MinX = beamprofiles[options.setupConfiguration][abs(options.PDGID)][options.Energy]["minX"]
+    process.VtxSmeared.MaxX = beamprofiles[options.setupConfiguration][abs(options.PDGID)][options.Energy]["maxX"]
+    process.VtxSmeared.MinY = beamprofiles[options.setupConfiguration][abs(options.PDGID)][options.Energy]["minY"]
+    process.VtxSmeared.MaxY = beamprofiles[options.setupConfiguration][abs(options.PDGID)][options.Energy]["maxY"]
 else:
-    process.VtxSmeared.MeanY = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["meanY"]
-    process.VtxSmeared.MeanX = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["meanX"]
-    process.VtxSmeared.MeanZ = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["meanZ"]
-    process.VtxSmeared.SigmaX = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["sigmaX"]
-    process.VtxSmeared.SigmaY = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["sigmaY"]
-    process.VtxSmeared.SigmaZ = beamprofiles[options.setupConfiguration][options.PDGID][options.Energy]["sigmaZ"]
+    process.VtxSmeared.MeanY = beamprofiles[options.setupConfiguration][abs(options.PDGID)][options.Energy]["meanY"]
+    process.VtxSmeared.MeanX = beamprofiles[options.setupConfiguration][abs(options.PDGID)][options.Energy]["meanX"]
+    process.VtxSmeared.MeanZ = beamprofiles[options.setupConfiguration][abs(options.PDGID)][options.Energy]["meanZ"]
+    process.VtxSmeared.SigmaX = beamprofiles[options.setupConfiguration][abs(options.PDGID)][options.Energy]["sigmaX"]
+    process.VtxSmeared.SigmaY = beamprofiles[options.setupConfiguration][abs(options.PDGID)][options.Energy]["sigmaY"]
+    process.VtxSmeared.SigmaZ = beamprofiles[options.setupConfiguration][abs(options.PDGID)][options.Energy]["sigmaZ"]
 
 process.g4SimHits.HGCSD.RejectMouseBite = True
 process.g4SimHits.HGCSD.RotatedWafer    = True
@@ -448,7 +451,7 @@ process.HGCalTBAnalyzer.UseBH       = True
 process.HGCalTBAnalyzer.UseBeam     = True
 process.HGCalTBAnalyzer.ZFrontEE    = 1110.0
 process.HGCalTBAnalyzer.ZFrontFH    = 1172.3
-process.HGCalTBAnalyzer.DoPassive   = True
+process.HGCalTBAnalyzer.DoPassive   = False
 
 # Path and EndPath definitions
 process.generation_step = cms.Path(process.pgen)
