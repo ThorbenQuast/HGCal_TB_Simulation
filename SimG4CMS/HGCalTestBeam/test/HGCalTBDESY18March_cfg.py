@@ -22,10 +22,10 @@ options.register('NEvents',
                  'Number of events to be generated')
 
 options.register('setupConfiguration',
-                0,
+                -1,
                  VarParsing.VarParsing.multiplicity.singleton,
                  VarParsing.VarParsing.varType.int,
-                 'setupConfiguration (0: March 2018 - dummy).'
+                 'setupConfiguration (-1: March 2018 - dummy).'
                 )
 
 options.register('Energy',
@@ -75,7 +75,7 @@ process.load('SimGeneral.HepPDTESSource.pythiapdt_cfi')
 process.load('Configuration.EventContent.EventContent_cff')
 process.load('SimGeneral.MixingModule.mixNoPU_cfi')
 
-if options.setupConfiguration==0:
+if options.setupConfiguration==-1:
     process.load('SimG4CMS.HGCalTestBeam.HGCalTB180MarchDESYDummyXML_cfi')
 elif options.setupConfiguration==6:
     process.load('SimG4CMS.HGCalTestBeam.HGCalTB180MarchDESYXML16mmW_cfi')
@@ -135,11 +135,14 @@ process.genstepfilter.triggerConditions=cms.vstring("generation_step")
 from Configuration.AlCa.GlobalTag import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run2_mc', '')
 
-process.generator = cms.EDProducer("FlatRandomEThetaGunProducer",
+
+
+# Gaussian momentum distribution of incoming particle guns
+process.generator = cms.EDProducer("GaussRandomPThetaGunProducer",
     AddAntiParticle = cms.bool(False),
     PGunParameters = cms.PSet(
-        MinE = cms.double(options.Energy-options.EnergyWidth),
-        MaxE = cms.double(options.Energy+options.EnergyWidth),
+        MeanP = cms.double(options.Energy),
+        SigmaP = cms.double(options.Energy* 0.128 * pow(options.Energy, -1.01)),       #rough parameterisation from then relative momentum spread taken from here: http://www.desy.de/f/students/2016/reports/RicardoWoelker.pdf.gz
         MinTheta = cms.double(0.0),
         MaxTheta = cms.double(0.0),
         MinPhi = cms.double(-3.14159265359),
