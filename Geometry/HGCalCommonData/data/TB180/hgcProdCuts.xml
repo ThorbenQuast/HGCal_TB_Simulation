@@ -4,7 +4,6 @@
 <SpecParSection label="hgcProdCuts.xml" eval="true">
   <SpecPar name="hgcProdCuts">
     <PartSelector path="//HGCalEE"/>
-    <PartSelector path="//HGCalHE"/>
     <Parameter name="CMSCutsRegion" value="HGCalRegion" eval="false"/>
     <Parameter name="ProdCutsForElectrons" value="0.03*mm"/>
     <Parameter name="ProdCutsForPositrons" value="0.03*mm"/>
