@@ -325,9 +325,9 @@ beamprofiles[2][211][80] = beamprofiles[2][11][80]
 beamprofiles[2][211][90] = beamprofiles[2][11][90]
 beamprofiles[2][13][250] = beamprofiles[2][211][250]
 beamprofiles[2][2212] = beamprofiles[2][211]
-beamprofiles[2][22][55] = beamprofiles[2][11][55]
-beamprofiles[2][22][65] = beamprofiles[2][11][65]
-beamprofiles[2][22][70] = beamprofiles[2][11][70]
+beamprofiles[2][22]= beamprofiles[2][11]
+
+
 
 options = VarParsing.VarParsing('standard')
 
