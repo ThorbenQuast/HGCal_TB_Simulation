@@ -200,6 +200,17 @@ beamprofiles = {
                 #"maxZ": 1095.000001 #for v3 to test impact of upstream material in beam line
                 "maxZ": -799.99999
             },
+            15: {   #Energy, used for further evaluation of WGAN study, T.Q. 27 September 2018
+                "type": "Flat",
+                "minX": -3.,
+                "maxX": 3.0,
+                "minY": -3.0,
+                "maxY": 3.0,
+                #"minZ": 1094.99999, #for v3 to test impact of upstream material in beam line
+                "minZ": -800.00001,  
+                #"maxZ": 1095.000001 #for v3 to test impact of upstream material in beam line
+                "maxZ": -799.99999
+            },            
             55: {   #Energy, used for further evaluation of WGAN study, T.Q. 27 September 2018
                 "type": "Flat",
                 "minX": -3.,
@@ -314,6 +325,9 @@ beamprofiles[2][211][80] = beamprofiles[2][11][80]
 beamprofiles[2][211][90] = beamprofiles[2][11][90]
 beamprofiles[2][13][250] = beamprofiles[2][211][250]
 beamprofiles[2][2212] = beamprofiles[2][211]
+beamprofiles[2][22][55] = beamprofiles[2][11][55]
+beamprofiles[2][22][65] = beamprofiles[2][11][65]
+beamprofiles[2][22][70] = beamprofiles[2][11][70]
 
 options = VarParsing.VarParsing('standard')
 
